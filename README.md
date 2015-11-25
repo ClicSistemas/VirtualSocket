@@ -4,12 +4,8 @@ A tool for socket testing. It can create both TCP and UDP client or  server. It 
 
 ![Main Screen](http://i.imgur.com/XqNcFMz.png) 
 
-# Download
+## Download
 [Check the releases](https://github.com/ClicSistemas/VirtualSocket/releases)
 
-# Development
-- First Release 1.0a
-- Improvements in the code 
-
-# VirtualSocket by
+## VirtualSocket by
 [Clic Sistemas Ltda](http://clicsistemas.com.br)
