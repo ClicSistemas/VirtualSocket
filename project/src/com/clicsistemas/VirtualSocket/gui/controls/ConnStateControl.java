@@ -151,14 +151,18 @@ public class ConnStateControl extends javax.swing.JPanel {
     }
     
     public void error(String errorMsg, String location) {
-        this.append("Error on [" + location + "]" + errorMsg);
+        this.txtConversation.append("Error on [" + location + "]: \r\n" + errorMsg + "\r\n");
     }
 
     public void append(String string) {
-        this.txtConversation.append(string + Util.NEW_LINE);
+        String text = Util.ShowSymbol(string);
+        
+        this.txtConversation.append(text + Util.NEW_LINE);
     }
     
     public void appendNoNewLine(String string) {
-        this.txtConversation.append(string);
+        String text = Util.ShowSymbol(string);
+        
+        this.txtConversation.append(text);
     }
 }

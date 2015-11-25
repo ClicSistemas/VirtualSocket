@@ -81,4 +81,12 @@ public class Util {
             control.error(e.getLocalizedMessage(), "Send");
         }
     }
+
+    public static String ShowSymbol(String string) {
+        string = string.replace("\r", "<CR>");
+        string = string.replace("\n", "<LF>");
+        string = string.replace("\0", "<NULL>");
+        
+        return string;
+    }
 }

@@ -115,6 +115,8 @@ public class Client extends javax.swing.JPanel  implements IConnControl {
             error("Error closing client : "+e);
         }
          
+         this.connDetailsControl1.setConnectButtonText("Connect");
+         
         socket = null;
         client = null;
     }

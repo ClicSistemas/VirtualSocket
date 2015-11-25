@@ -45,11 +45,14 @@ public class ConnDetailsControl extends javax.swing.JPanel {
 
         jLabel1.setText("Hostname or IP Addres:");
 
+        txtHostname.setText("0.0.0.0");
+
         jLabel2.setText("Port");
 
         spPort.setModel(new javax.swing.SpinnerNumberModel(0, 0, 65535, 1));
 
-        btnComPorts.setText("Common Ports");
+        btnComPorts.setText("Standard Ports");
+        btnComPorts.setActionCommand("Standard Ports");
         btnComPorts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComPortsActionPerformed(evt);
@@ -74,28 +77,26 @@ public class ConnDetailsControl extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(13, 13, 13)
+                            .addComponent(chkSecure)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(chkUDp)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnConnect))
+                        .addComponent(txtHostname))
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
-                        .addGap(160, 160, 160))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(spPort)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addComponent(chkSecure)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(chkUDp)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnConnect))
-                            .addComponent(txtHostname))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spPort)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 57, Short.MAX_VALUE)
-                                .addComponent(btnComPorts)))
-                        .addContainerGap())))
+                        .addGap(0, 53, Short.MAX_VALUE)
+                        .addComponent(btnComPorts)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
