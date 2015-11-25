@@ -1,10 +1,10 @@
-package net.sf.sockettest.swing;
+package com.clicsistemas.VirtualSocket.gui;
 
+import com.clicsistemas.VirtualSocket.Util;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.event.*;
-import net.sf.sockettest.*;
 
 /**
  *

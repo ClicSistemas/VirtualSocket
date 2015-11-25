@@ -1,6 +1,6 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Product	: VirtualSocket
-Version : 1.0a
+Version : 1.0a2
 Licence	: GNU General Public License v2.0
 Author  : Clic Sistemas Ltda.
 

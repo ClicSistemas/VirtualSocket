@@ -1,4 +1,4 @@
-package net.sf.sockettest;
+package com.clicsistemas.VirtualSocket;
 
 import java.util.StringTokenizer;
 import javax.swing.table.*;
@@ -20,7 +20,7 @@ public class PortModel extends AbstractTableModel {
     /** Creates a new instance of PortModel */
     public PortModel(String fileName) {
         try	{
-            fileContent = Util.readFile(fileName, this);
+            fileContent = Util.readFile(fileName);
         } catch (IOException e) {
             fileContent ="80\tWeb\tNothing";
             System.err.println("Error reading : "+fileName+" : "+e);

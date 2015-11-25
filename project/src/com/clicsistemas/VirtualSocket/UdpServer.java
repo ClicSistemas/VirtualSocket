@@ -1,4 +1,4 @@
-package net.sf.sockettest;
+package com.clicsistemas.VirtualSocket;
 
 import java.net.*;
 import java.io.*;

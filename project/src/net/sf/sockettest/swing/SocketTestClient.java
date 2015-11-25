@@ -1,5 +1,9 @@
 package net.sf.sockettest.swing;
 
+import com.clicsistemas.VirtualSocket.gui.PortDialog;
+import com.clicsistemas.VirtualSocket.MyTrustManager;
+import com.clicsistemas.VirtualSocket.Util;
+import com.clicsistemas.VirtualSocket.SocketClient;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -14,7 +18,6 @@ import java.io.*;
 import javax.net.*;
 import javax.net.ssl.*;
 
-import net.sf.sockettest.*;
 /**
  *
  * @author Akshathkumar Shetty
@@ -49,7 +52,12 @@ public class SocketTestClient extends JPanel {
     private JButton clearButton = new JButton("Clear");
     
     private JCheckBox secureButton = new JCheckBox("Secure");
+    private JCheckBox includeNewLineButton = new JCheckBox("Include <CR><LF>?");
+    
+    private boolean includeNewLine = true;
     private boolean isSecure = false;
+    
+    
     private GridBagConstraints gbc = new GridBagConstraints();
     
     private Socket socket;
@@ -211,6 +219,15 @@ public class SocketTestClient extends JPanel {
                 BorderFactory.createEmptyBorder(0,0,0,3),
                 BorderFactory.createTitledBorder("Send")));
         
+        includeNewLineButton.setToolTipText("Include new line to the message");
+        includeNewLineButton.addItemListener(
+                new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                includeNewLine = !includeNewLine;
+            }
+        });
+        toPanel.add(includeNewLineButton, gbc);
+        
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridBagLayout());
         gbc.weighty = 0.0;
@@ -364,13 +381,13 @@ public class SocketTestClient extends JPanel {
                 " ["+socket.getInetAddress().getHostAddress()+"] ");
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         messagesField.setText("");
-        socketClient=SocketClient.handle(this,socket);
+        //socketClient=SocketClient.handle(,socket);
         sendField.requestFocus();
     }
     
     public synchronized void disconnect() {
         try {
-            socketClient.setDesonnected(true);
+            socketClient.setDisconnected(true);
             socket.close();
         } catch (Exception e) {
             System.err.println("Error closing client : "+e);
@@ -418,7 +435,13 @@ public class SocketTestClient extends JPanel {
                         new OutputStreamWriter(socket.getOutputStream())), true);
             }
             append("S: "+s);
-            out.print(s + Util.NEW_LINE);
+            
+            if(this.includeNewLine) {            
+               out.print(s + Util.NEW_LINE);
+            } else {
+               out.print(s);
+            }
+            
             out.flush();
             sendField.setText("");
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));

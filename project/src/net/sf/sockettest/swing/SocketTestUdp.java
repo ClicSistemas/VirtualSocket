@@ -1,5 +1,8 @@
 package net.sf.sockettest.swing;
 
+import com.clicsistemas.VirtualSocket.gui.PortDialog;
+import com.clicsistemas.VirtualSocket.Util;
+import com.clicsistemas.VirtualSocket.UdpServer;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -9,7 +12,6 @@ import javax.swing.border.*;
 import java.net.*;
 import java.io.*;
 
-import net.sf.sockettest.*;
 
 /**
  *

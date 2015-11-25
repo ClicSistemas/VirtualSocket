@@ -1,5 +1,8 @@
 package net.sf.sockettest.swing;
 
+import com.clicsistemas.VirtualSocket.gui.PortDialog;
+import com.clicsistemas.VirtualSocket.Util;
+import com.clicsistemas.VirtualSocket.SocketServer;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -9,7 +12,6 @@ import javax.swing.border.*;
 import java.net.*;
 import java.io.*;
 
-import net.sf.sockettest.*;
 
 /**
  *
@@ -359,13 +361,13 @@ public class SocketTestServer extends JPanel /*JFrame*/ {
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         messagesField.setText("> Server Started on Port: "+portNo+ Util.NEW_LINE);
         append("> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        socketServer=SocketServer.handle(this,server);
+     //   socketServer=SocketServer.handle(this,server);
         //sendField.requestFocus();
     }
     //disconnect a client
     public synchronized void disconnect() {
         try {
-            socketServer.setDesonnected(true);
+            socketServer.setDisconnected(true);
         } catch (Exception e) {}
     }
     

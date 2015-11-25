@@ -1,5 +1,6 @@
-package net.sf.sockettest;
+package com.clicsistemas.VirtualSocket;
 
+import com.clicsistemas.VirtualSocket.gui.controls.IConnControl;
 import java.net.*;
 import java.io.*;
 import java.awt.*;
@@ -33,6 +34,17 @@ public class Util {
             return (false);
         }
     }
+    
+    public static void openWebpage(URI uri) {
+    Desktop desktop = Desktop.isDesktopSupported() ? Desktop.getDesktop() : null;
+    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+        try {
+            desktop.browse(uri);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
 
     public static void writeFile(String fileName, String text)
             throws IOException {
@@ -42,10 +54,9 @@ public class Util {
         out.close();
     }
 
-    public static String readFile(String fileName, Object parent)
+    public static String readFile(String fileName)
             throws IOException {
         StringBuffer sb = new StringBuffer();
-        ClassLoader cl = parent.getClass().getClassLoader();
         InputStream is = cl.getResourceAsStream(fileName);
         BufferedReader in = new BufferedReader(new InputStreamReader(is));
         String s;
@@ -55,5 +66,19 @@ public class Util {
         }
         in.close();
         return sb.toString();
+    }
+    
+    public static void SendToSocket(Socket socket, String msg, IConnControl control) {
+         try {                       
+           PrintWriter clientOut = new PrintWriter(new BufferedWriter(
+                        new OutputStreamWriter(socket.getOutputStream())), true);          
+           
+           control.append("S: " + msg);
+           
+           clientOut.print(msg);
+           clientOut.flush();
+        } catch (Exception e) {
+            control.error(e.getLocalizedMessage(), "Send");
+        }
     }
 }

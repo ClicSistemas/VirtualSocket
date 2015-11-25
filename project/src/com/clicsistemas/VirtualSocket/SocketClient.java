@@ -1,5 +1,6 @@
-package net.sf.sockettest;
+package com.clicsistemas.VirtualSocket;
 
+import com.clicsistemas.VirtualSocket.gui.controls.IConnControl;
 import java.net.*;
 import java.io.*;
 import net.sf.sockettest.swing.SocketTestClient;
@@ -11,23 +12,23 @@ public class SocketClient extends Thread {
     
     private static SocketClient socketClient=null;
     private Socket socket=null;
-    private SocketTestClient parent;
+    private IConnControl parent;
     private BufferedInputStream in;
     private boolean desonnected=false;
     
-    public synchronized void setDesonnected(boolean cr) {
+    public synchronized void setDisconnected(boolean cr) {
         desonnected=cr;
     }
     
-    private SocketClient(SocketTestClient parent, Socket s) {
+    private SocketClient(IConnControl parent, Socket s) {
         super("SocketClient");
         this.parent = parent;
         socket=s;
-        setDesonnected(false);
+        setDisconnected(false);
         start();
     }
     
-    public static synchronized SocketClient handle(SocketTestClient parent, Socket s) {
+    public static synchronized SocketClient handle(IConnControl parent, Socket s) {
         if(socketClient==null)
             socketClient=new SocketClient(parent, s);
         else {

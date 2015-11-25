@@ -1,4 +1,4 @@
-package net.sf.sockettest;
+package com.clicsistemas.VirtualSocket;
 
 import javax.net.ssl.*;
 import java.security.cert.*;

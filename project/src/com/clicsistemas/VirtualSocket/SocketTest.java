@@ -1,16 +1,11 @@
-package net.sf.sockettest;
+package com.clicsistemas.VirtualSocket;
 
+import com.clicsistemas.VirtualSocket.gui.About;
+import com.clicsistemas.VirtualSocket.gui.Client;
+import com.clicsistemas.VirtualSocket.gui.Server;
 import java.awt.*;
-import java.applet.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.border.*;
-import net.sf.sockettest.swing.About;
-import net.sf.sockettest.swing.SocketTestClient;
-import net.sf.sockettest.swing.SocketTestServer;
-import net.sf.sockettest.swing.SocketTestUdp;
-import net.sf.sockettest.swing.SplashScreen;
+import com.clicsistemas.VirtualSocket.gui.SplashScreen;
 
 /**
  *
@@ -24,14 +19,12 @@ public class SocketTest extends JFrame {
         Container cp = getContentPane();
         
         tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        SocketTestClient client = new SocketTestClient(this);
-        SocketTestServer server = new SocketTestServer(this);
-        SocketTestUdp udp = new SocketTestUdp(this);
+        Client client = new Client();
+        Server server = new Server();        
         About about = new About();
         
         tabbedPane.addTab("Client", Util.Arrow, (Component)client, "Test any server");
         tabbedPane.addTab("Server", Util.Arrow, server, "Test any client");
-        tabbedPane.addTab("Udp", Util.Arrow, udp, "Test any UDP Client or Server");
         tabbedPane.addTab("About", Util.Arrow, about, "About SocketTest");        
         tabbedPane.setBorder(BorderFactory.createSoftBevelBorder(2));
         
@@ -64,7 +57,7 @@ public class SocketTest extends JFrame {
         SocketTest st = new SocketTest();
         
         st.setTitle("VirtualSocket");
-        st.setSize(600,500);
+        st.setSize(660, 740);
         st.setBackground(Color.getHSBColor(191, 28, 56));
         
         Util.centerWindow(st);

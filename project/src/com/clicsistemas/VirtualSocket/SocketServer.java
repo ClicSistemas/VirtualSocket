@@ -1,5 +1,6 @@
-package net.sf.sockettest;
+package com.clicsistemas.VirtualSocket;
 
+import com.clicsistemas.VirtualSocket.gui.controls.IConnControl;
 import java.net.*;
 import java.io.*;
 import net.sf.sockettest.swing.SocketTestServer;
@@ -13,13 +14,13 @@ public class SocketServer extends Thread {
     private static SocketServer socketServer = null;
     private Socket socket = null;
     private ServerSocket server = null;
-    private SocketTestServer parent;
+    private IConnControl parent;
     private BufferedInputStream in;
     private boolean desonnected=false;
     private boolean stop = false;
     
     //disconnect client
-    public synchronized void setDesonnected(boolean cr) {
+    public synchronized void setDisconnected(boolean cr) {
         if(socket!=null && cr==true) {
             try	{
                 socket.close();
@@ -42,25 +43,25 @@ public class SocketServer extends Thread {
         }
     }
     
-    private SocketServer(SocketTestServer parent, ServerSocket s) {
+    private SocketServer(IConnControl parent, ServerSocket s) {
         super("SocketServer");
         this.parent = parent;
         server=s;
         setStop(false);
-        setDesonnected(false);
+        setDisconnected(false);
         start();
     }
     
     
     
-    public static synchronized SocketServer handle(SocketTestServer parent,
+    public static synchronized SocketServer handle(IConnControl parent,
             ServerSocket s) {
         if(socketServer==null)
             socketServer=new SocketServer(parent, s);
         else {
             if(socketServer.server!=null) {
                 try	{
-                    socketServer.setDesonnected(true);
+                    socketServer.setDisconnected(true);
                     socketServer.setStop(true);
                     if(socketServer.socket!=null)
                         socketServer.socket.close();
@@ -110,7 +111,7 @@ public class SocketServer extends Thread {
             in = new BufferedInputStream(is);
         } catch(IOException e) {
             parent.append("> Cound't open input stream on Clinet "+e.getMessage());
-            setDesonnected(true);
+            setDisconnected(true);
             return;
         }
         
@@ -120,7 +121,7 @@ public class SocketServer extends Thread {
             try	{
                 rec = readInputStream(in);//in.readLine();
             } catch (Exception e) {
-                setDesonnected(true);
+                setDisconnected(true);
                 if(!desonnected) {
                     parent.error(e.getMessage(),"Lost Client conection");
                     parent.append("> Server lost Client conection.");
@@ -132,7 +133,7 @@ public class SocketServer extends Thread {
             if (rec != null) {
                 parent.append("R: "+rec);               
             } else {
-                setDesonnected(true);
+                setDisconnected(true);
                 parent.append("> Client closed conection.");
                 break;
             }

@@ -1,11 +1,11 @@
-package net.sf.sockettest.swing;
+package com.clicsistemas.VirtualSocket.gui;
 
+import com.clicsistemas.VirtualSocket.Util;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.awt.*;
 import java.io.IOException;
-import net.sf.sockettest.PortModel;
-import net.sf.sockettest.*;
+import com.clicsistemas.VirtualSocket.PortModel;
 
 /**
  *
