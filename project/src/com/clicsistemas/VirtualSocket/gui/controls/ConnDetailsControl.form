@@ -28,11 +28,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Component id="chkSecure" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="chkUDp" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
                           <Component id="btnConnect" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txtHostname" max="32767" attributes="0"/>
@@ -72,8 +68,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnComPorts" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnConnect" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="chkUDp" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="chkSecure" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -106,7 +100,6 @@
     <Component class="javax.swing.JButton" name="btnComPorts">
       <Properties>
         <Property name="text" type="java.lang.String" value="Standard Ports"/>
-        <Property name="actionCommand" type="java.lang.String" value="Standard Ports"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnComPortsActionPerformed"/>
@@ -119,16 +112,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConnectActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="chkSecure">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Secure?"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JCheckBox" name="chkUDp">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Use UDP instead TCP?"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

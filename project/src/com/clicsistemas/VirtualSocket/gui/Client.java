@@ -5,6 +5,7 @@
  */
 package com.clicsistemas.VirtualSocket.gui;
 
+import com.clicsistemas.VirtualSocket.GlobalOptions;
 import com.clicsistemas.VirtualSocket.MyTrustManager;
 import com.clicsistemas.VirtualSocket.SocketClient;
 import com.clicsistemas.VirtualSocket.Util;
@@ -122,13 +123,17 @@ public class Client extends javax.swing.JPanel  implements IConnControl {
     }
 
     private void connect() {
+        if(GlobalOptions.ResetOnConnect) {
+            this.connStateControl1.clear();
+        }
+        
         this.connDetailsControl1.setEnabled(false);
         this.sendControl1.setEnabled(false);
         
         String ip = this.connDetailsControl1.getHostName();
         int port = this.connDetailsControl1.getPort();
 
-        if(this.connDetailsControl1.isUdpEnabled()) {
+        if(GlobalOptions.UseUDP) {
             error("UDP not implemented yet, using Tcp instead");
         }
         
@@ -139,7 +144,7 @@ public class Client extends javax.swing.JPanel  implements IConnControl {
                     try {
                         this.connStateControl1.append("Connecting to: " + ip + ":" + port);
                         
-                        if(this.connDetailsControl1.isSecureEnabled()) {
+                        if(GlobalOptions.TLSSocket) {
                             this.connStateControl1.append("Mode: Secure");
                             
                             TrustManager[] tm = new TrustManager[] { new MyTrustManager(this) }; 

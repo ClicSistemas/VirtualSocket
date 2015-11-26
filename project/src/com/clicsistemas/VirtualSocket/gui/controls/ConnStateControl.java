@@ -5,6 +5,7 @@
  */
 package com.clicsistemas.VirtualSocket.gui.controls;
 
+import com.clicsistemas.VirtualSocket.GlobalOptions;
 import com.clicsistemas.VirtualSocket.Util;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -155,7 +156,11 @@ public class ConnStateControl extends javax.swing.JPanel {
     }
 
     public void append(String string) {
-        String text = Util.ShowSymbol(string);
+        String text = string;
+        
+        if(GlobalOptions.ShowSymbols) {
+            text = Util.ShowSymbol(text);
+        }
         
         this.txtConversation.append(text + Util.NEW_LINE);
     }
@@ -164,5 +169,9 @@ public class ConnStateControl extends javax.swing.JPanel {
         String text = Util.ShowSymbol(string);
         
         this.txtConversation.append(text);
+    }
+
+    public void clear() {
+        this.txtConversation.setText("");
     }
 }

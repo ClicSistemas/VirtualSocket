@@ -5,6 +5,7 @@
  */
 package com.clicsistemas.VirtualSocket.gui.controls;
 
+import com.clicsistemas.VirtualSocket.GlobalOptions;
 import com.clicsistemas.VirtualSocket.Util;
 
 /**
@@ -31,9 +32,8 @@ public class SendControl extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        txtSend = new javax.swing.JTextField();
         btnSend = new javax.swing.JButton();
-        chkIncludeCrLF = new javax.swing.JCheckBox();
+        txtSend = new javax.swing.JComboBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Send "));
 
@@ -46,7 +46,7 @@ public class SendControl extends javax.swing.JPanel {
             }
         });
 
-        chkIncludeCrLF.setText("Include CR/LF Chars?");
+        txtSend.setEditable(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -55,15 +55,12 @@ public class SendControl extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(chkIncludeCrLF))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(txtSend, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtSend, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -73,32 +70,34 @@ public class SendControl extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSend))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chkIncludeCrLF)
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnSend)
+                    .addComponent(txtSend, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 25, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-        String message = this.txtSend.getText();
+        String message = (String)this.txtSend.getSelectedItem();
         
-        if(this.chkIncludeCrLF.isSelected()) {
+        if(GlobalOptions.IncludeCrLF) {
             message += Util.NEW_LINE;
         }
         
         if(this.control != null) {
             this.control.OnSendMessage(message);
+            this.txtSend.addItem(message);
+            
+            if(this.txtSend.getItemCount() > 5) {
+                this.txtSend.removeItemAt(0);
+            }
         }
     }//GEN-LAST:event_btnSendActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSend;
-    private javax.swing.JCheckBox chkIncludeCrLF;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField txtSend;
+    private javax.swing.JComboBox txtSend;
     // End of variables declaration//GEN-END:variables
 
     public void setListener(IConnControl control) {

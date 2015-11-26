@@ -38,8 +38,6 @@ public class ConnDetailsControl extends javax.swing.JPanel {
         spPort = new javax.swing.JSpinner();
         btnComPorts = new javax.swing.JButton();
         btnConnect = new javax.swing.JButton();
-        chkSecure = new javax.swing.JCheckBox();
-        chkUDp = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Connection/Server "));
 
@@ -52,7 +50,6 @@ public class ConnDetailsControl extends javax.swing.JPanel {
         spPort.setModel(new javax.swing.SpinnerNumberModel(0, 0, 65535, 1));
 
         btnComPorts.setText("Standard Ports");
-        btnComPorts.setActionCommand("Standard Ports");
         btnComPorts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComPortsActionPerformed(evt);
@@ -66,10 +63,6 @@ public class ConnDetailsControl extends javax.swing.JPanel {
             }
         });
 
-        chkSecure.setText("Secure?");
-
-        chkUDp.setText("Use UDP instead TCP?");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,11 +72,7 @@ public class ConnDetailsControl extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(13, 13, 13)
-                            .addComponent(chkSecure)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(chkUDp)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGap(215, 215, 215)
                             .addComponent(btnConnect))
                         .addComponent(txtHostname))
                     .addComponent(jLabel1))
@@ -112,9 +101,7 @@ public class ConnDetailsControl extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnComPorts)
-                    .addComponent(btnConnect)
-                    .addComponent(chkUDp)
-                    .addComponent(chkSecure))
+                    .addComponent(btnConnect))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -134,8 +121,6 @@ public class ConnDetailsControl extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComPorts;
     private javax.swing.JButton btnConnect;
-    private javax.swing.JCheckBox chkSecure;
-    private javax.swing.JCheckBox chkUDp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JSpinner spPort;
@@ -149,21 +134,9 @@ public class ConnDetailsControl extends javax.swing.JPanel {
     public int getPort() {
         return (Integer)this.spPort.getValue();
     }
-    
-    public boolean isSecureEnabled() {
-        return this.chkSecure.isSelected();
-    }
-    
-    public boolean isUdpEnabled() {
-        return this.chkUDp.isSelected();
-    }
-    
+        
     public void setConnectButtonText(String text) {
         this.btnConnect.setText(text);
-    }
-    
-    public void setSecureVisible(boolean visible) {
-        this.chkSecure.setVisible(visible);
     }
     
     public void setListener(IConnControl control) {

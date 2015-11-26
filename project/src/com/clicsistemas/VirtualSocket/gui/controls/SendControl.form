@@ -26,17 +26,13 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="chkIncludeCrLF" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtSend" min="-2" pref="382" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="txtSend" min="-2" pref="386" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSend" pref="69" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -50,12 +46,10 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtSend" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSend" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtSend" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="chkIncludeCrLF" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -66,8 +60,6 @@
         <Property name="text" type="java.lang.String" value="Message:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSend">
-    </Component>
     <Component class="javax.swing.JButton" name="btnSend">
       <Properties>
         <Property name="text" type="java.lang.String" value="Send"/>
@@ -76,9 +68,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSendActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="chkIncludeCrLF">
+    <Component class="javax.swing.JComboBox" name="txtSend">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Include CR/LF Chars?"/>
+        <Property name="editable" type="boolean" value="true"/>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

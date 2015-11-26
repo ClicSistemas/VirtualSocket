@@ -5,6 +5,7 @@
  */
 package com.clicsistemas.VirtualSocket.gui;
 
+import com.clicsistemas.VirtualSocket.GlobalOptions;
 import com.clicsistemas.VirtualSocket.SocketServer;
 import com.clicsistemas.VirtualSocket.Util;
 import com.clicsistemas.VirtualSocket.gui.controls.IConnControl;
@@ -33,7 +34,6 @@ public class Server extends javax.swing.JPanel implements IConnControl {
     public Server() {
         initComponents();
         
-        this.connDetailsControl1.setSecureVisible(false);
         this.connDetailsControl1.setConnectButtonText("Listen");
         this.connDetailsControl1.setListener(this);
         this.sendControl1.setListener(this);
@@ -134,7 +134,12 @@ public class Server extends javax.swing.JPanel implements IConnControl {
         this.connStateControl1.error(message, where);
     }
    
-    private void connect() { this.connDetailsControl1.setEnabled(false);
+    private void connect() {
+        if(GlobalOptions.ResetOnConnect) {
+            this.connStateControl1.clear();
+        }
+        
+        this.connDetailsControl1.setEnabled(false);
         this.sendControl1.setEnabled(false);
         
         ip = this.connDetailsControl1.getHostName();
@@ -147,7 +152,7 @@ public class Server extends javax.swing.JPanel implements IConnControl {
                     try {
                         this.connStateControl1.append("Listen to: " + ip + ":" + port);
                         
-                        if(this.connDetailsControl1.isUdpEnabled()) {
+                        if(GlobalOptions.UseUDP) {
                             openUdp();
                         } else {
                             openTcp();
