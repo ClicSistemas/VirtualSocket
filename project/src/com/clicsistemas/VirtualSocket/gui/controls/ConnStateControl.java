@@ -28,6 +28,7 @@ public class ConnStateControl extends javax.swing.JPanel {
      */
     public ConnStateControl() {
         initComponents();
+        this.clear();
     }
 
     /**
