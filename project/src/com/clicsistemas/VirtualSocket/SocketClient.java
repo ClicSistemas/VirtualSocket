@@ -70,7 +70,7 @@ public class SocketClient extends Thread {
                     break;
                 }
                 
-                parent.append("R: "+got);
+                parent.append(got, "RECEIVED");
             } catch(IOException e) {
                 if(!desonnected) {
                     parent.error(e.getMessage(),"Connection lost");

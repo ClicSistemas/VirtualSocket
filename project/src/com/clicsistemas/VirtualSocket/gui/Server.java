@@ -125,8 +125,8 @@ public class Server extends javax.swing.JPanel implements IConnControl {
     }
 
     @Override
-    public void append(String string) {
-        this.connStateControl1.append(string);
+    public void append(String string, String kind) {
+        this.connStateControl1.append(string, kind);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class Server extends javax.swing.JPanel implements IConnControl {
                 // Check the Host
                 if (Util.checkHost(ip)) {                    
                     try {
-                        this.connStateControl1.append("Listen to: " + ip + ":" + port);
+                        this.connStateControl1.append("Listen to: " + ip + ":" + port, "CONNECT");
                         
                         if(GlobalOptions.UseUDP) {
                             openUdp();
@@ -187,7 +187,7 @@ public class Server extends javax.swing.JPanel implements IConnControl {
         server = new ServerSocket(port,1,bindAddr);
         socketServer=SocketServer.handle(this,server);
         
-        append("Tcp Server Started");
+        append("Tcp Server Started", "CONNECT");
     }
 
     private void openUdp() {

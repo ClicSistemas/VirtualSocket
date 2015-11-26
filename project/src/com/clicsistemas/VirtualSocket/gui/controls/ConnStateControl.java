@@ -7,9 +7,14 @@ package com.clicsistemas.VirtualSocket.gui.controls;
 
 import com.clicsistemas.VirtualSocket.GlobalOptions;
 import com.clicsistemas.VirtualSocket.Util;
+import com.clicsistemas.VirtualSocket.gui.RawVisualizer;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import net.sf.sockettest.swing.SocketTestClient;
 
 /**
@@ -37,20 +42,17 @@ public class ConnStateControl extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lbConnectedTo = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtConversation = new javax.swing.JTextArea();
         btnSave = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table = new javax.swing.JTable();
+        btnViewRaw = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Connection"));
 
         jLabel1.setText("Connection Details:");
 
         jLabel2.setText("Connected to:");
-
-        txtConversation.setColumns(20);
-        txtConversation.setRows(5);
-        jScrollPane1.setViewportView(txtConversation);
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +68,32 @@ public class ConnStateControl extends javax.swing.JPanel {
             }
         });
 
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Data", "Length"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Long.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jScrollPane2.setViewportView(table);
+
+        btnViewRaw.setText("View Raw Data");
+        btnViewRaw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewRawActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,7 +101,13 @@ public class ConnStateControl extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnViewRaw)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnClear)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSave))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -81,12 +115,7 @@ public class ConnStateControl extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lbConnectedTo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 231, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnClear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSave)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -99,25 +128,37 @@ public class ConnStateControl extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addComponent(lbConnectedTo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
-                    .addComponent(btnClear))
+                    .addComponent(btnClear)
+                    .addComponent(btnViewRaw))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        this.txtConversation.setText("");
+        this.clear();
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String text = this.txtConversation.getText();
+        DefaultTableModel model = (DefaultTableModel)table.getModel();        
+        String text = "";
+        
+        StringBuilder sb = new StringBuilder();
+        
+        for(int i = 0; i < model.getRowCount(); i++) {
+            sb.append(model.getValueAt(i, 0));
+        }
+        
+        text = sb.toString();
+        
         if (text.equals("")) {
             error("Nothing to save", "Save to file");
             return;
         }
+        
         String fileName = "";
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File("."));
@@ -136,15 +177,25 @@ public class ConnStateControl extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void btnViewRawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRawActionPerformed
+        if(table.getSelectedRow() >= 0) {
+            DefaultTableModel model = (DefaultTableModel)table.getModel();
+            String data = (String) model.getValueAt(table.getSelectedRow(), 0);
+            RawVisualizer rv = new RawVisualizer(data);
+            rv.setVisible(true);
+        }
+    }//GEN-LAST:event_btnViewRawActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnViewRaw;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbConnectedTo;
-    private javax.swing.JTextArea txtConversation;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 
     public void setConnectedTo(String to) {
@@ -152,26 +203,32 @@ public class ConnStateControl extends javax.swing.JPanel {
     }
     
     public void error(String errorMsg, String location) {
-        this.txtConversation.append("Error on [" + location + "]: \r\n" + errorMsg + "\r\n");
+        appendRow("Error on [" + location + "]: \r\n" + errorMsg + "\r\n", "ERROR");
     }
 
-    public void append(String string) {
+    public void append(String data, String kind) {               
+        appendRow(data, kind);
+    }   
+    
+    private void appendRow(String string, String kind) {
         String text = string;
         
         if(GlobalOptions.ShowSymbols) {
             text = Util.ShowSymbol(text);
         }
         
-        this.txtConversation.append(text + Util.NEW_LINE);
-    }
-    
-    public void appendNoNewLine(String string) {
-        String text = Util.ShowSymbol(string);
-        
-        this.txtConversation.append(text);
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
+        model.addRow(new Object[] { text, text.length(), kind});
     }
 
     public void clear() {
-        this.txtConversation.setText("");
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Data", "Length", "Kind"
+            }
+        ));
     }
 }

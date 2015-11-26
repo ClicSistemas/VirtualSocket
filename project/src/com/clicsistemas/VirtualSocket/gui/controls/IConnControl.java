@@ -17,8 +17,8 @@ public interface IConnControl {
 
     public void error(String messege);
     public void disconnect();
-    public void append(String string);
-    public void error(String message, String connection_lost);
+    public void append(String string, String kind);
+    public void error(String message, String where);
 
     public void setClientSocket(Socket socket);
 }

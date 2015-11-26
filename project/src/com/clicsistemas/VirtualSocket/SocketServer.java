@@ -105,12 +105,12 @@ public class SocketServer extends Thread {
     private void startServer() {
         parent.setClientSocket(socket);
         InputStream is = null;
-        parent.append("> New Client: "+socket.getInetAddress().getHostAddress());
+        parent.append("> New Client: "+socket.getInetAddress().getHostAddress(), "SERVER");
         try {
             is = socket.getInputStream();
             in = new BufferedInputStream(is);
         } catch(IOException e) {
-            parent.append("> Cound't open input stream on Clinet "+e.getMessage());
+            parent.append("> Can't open input stream on Client "+e.getMessage(), "SERVER");
             setDisconnected(true);
             return;
         }
@@ -124,17 +124,17 @@ public class SocketServer extends Thread {
                 setDisconnected(true);
                 if(!desonnected) {
                     parent.error(e.getMessage(),"Lost Client conection");
-                    parent.append("> Server lost Client conection.");
+                    parent.append("> Server lost Client conection.", "SERVER");
                 } else
-                    parent.append("> Server closed Client conection.");
+                    parent.append("> Server closed Client conection.", "SERVER");
                 break;
             }
             
             if (rec != null) {
-                parent.append("R: "+rec);               
+                parent.append(rec,"RECEIVED");               
             } else {
                 setDisconnected(true);
-                parent.append("> Client closed conection.");
+                parent.append("> Client closed conection.", "SERVER");
                 break;
             }
         } //end of while

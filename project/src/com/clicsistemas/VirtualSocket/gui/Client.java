@@ -142,10 +142,10 @@ public class Client extends javax.swing.JPanel  implements IConnControl {
                 // Check the Host
                 if (Util.checkHost(ip)) {                    
                     try {
-                        this.connStateControl1.append("Connecting to: " + ip + ":" + port);
+                        this.connStateControl1.append("Connecting to: " + ip + ":" + port, "CONNECT");
                         
                         if(GlobalOptions.TLSSocket) {
-                            this.connStateControl1.append("Mode: Secure");
+                            this.connStateControl1.append("Mode: Secure", "CONNECT");
                             
                             TrustManager[] tm = new TrustManager[] { new MyTrustManager(this) }; 
                             SSLContext context = SSLContext.getInstance("TLS");
@@ -154,7 +154,7 @@ public class Client extends javax.swing.JPanel  implements IConnControl {
                             SSLSocketFactory factory = context.getSocketFactory();
                             socket = factory.createSocket(ip,port);
                         } else {      
-                            this.connStateControl1.append("Mode: Normal");
+                            this.connStateControl1.append("Mode: Normal", "CONNECT");
                             this.socket = new Socket(ip, port);
                         }
                         
@@ -183,8 +183,8 @@ public class Client extends javax.swing.JPanel  implements IConnControl {
     }
 
     @Override
-    public void append(String string) {
-        this.connStateControl1.append(string);
+    public void append(String string, String kind) {
+        this.connStateControl1.append(string, kind);
     }
 
     @Override

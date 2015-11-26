@@ -4,6 +4,7 @@ import com.clicsistemas.VirtualSocket.gui.controls.IConnControl;
 import java.net.*;
 import java.io.*;
 import java.awt.*;
+import java.util.Formatter;
 import javax.swing.ImageIcon;
 
 /**
@@ -73,7 +74,7 @@ public class Util {
            PrintWriter clientOut = new PrintWriter(new BufferedWriter(
                         new OutputStreamWriter(socket.getOutputStream())), true);          
            
-           control.append("S: " + msg);
+           control.append(msg, "SEND");
            
            clientOut.print(msg);
            clientOut.flush();
@@ -88,5 +89,23 @@ public class Util {
         string = string.replace("\0", "<NULL>");
         
         return string;
+    }
+    
+    public static String GetRawView(String string) {
+        byte[] bytes = string.getBytes();
+        
+        StringBuilder sb = new StringBuilder();
+        
+        Formatter formatter = new Formatter();
+        for (int i=0; i < bytes.length; i++) {
+            String raw =  Integer.toString( ( bytes[i] & 0xff ) + 0x100, 16).substring( 1 );
+            sb.append(raw.toUpperCase());
+            
+            if(i != (bytes.length - 1)) {
+                sb.append("-");
+            }
+        }
+        
+        return sb.toString();
     }
 }
