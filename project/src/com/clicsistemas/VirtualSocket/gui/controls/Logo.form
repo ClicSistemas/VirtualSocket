@@ -47,7 +47,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="10" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Vr: 1.0 Alpha 2"/>
+        <Property name="text" type="java.lang.String" value="Vr: 1.1a"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">

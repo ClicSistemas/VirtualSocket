@@ -34,7 +34,7 @@ public class Logo extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jLabel1.setText("Vr: 1.0 Alpha 2");
+        jLabel1.setText("Vr: 1.1a");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel3.setText("VirtualSocket");
